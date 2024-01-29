@@ -1,9 +1,5 @@
 :root {
-    --red: #ff5570;
-    --gray-dark: #7d7979;
-    --gray-light: #f2f2f2;
-    --gray-very-light: #f6f6f6;
-    --black: #000;
+    --green: #038768;
     --font-sans-serif: "Poppins", sans-serif;
     --font-serif: "DM Serif Display", serif;
   }
@@ -16,7 +12,7 @@
   
   html {
     box-sizing: border-box;
-    background-color: var(--red);
+    background-color: var(--green);
   }
   
  h1 {
@@ -25,5 +21,4 @@
     line-height: 1em;
     letter-spacing: 0.05em;
     color: white;
-    padding: 20px 0 0 30px;
   }
