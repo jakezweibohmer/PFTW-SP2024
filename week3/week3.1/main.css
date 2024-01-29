@@ -1,0 +1,29 @@
+:root {
+    --red: #ff5570;
+    --gray-dark: #7d7979;
+    --gray-light: #f2f2f2;
+    --gray-very-light: #f6f6f6;
+    --black: #000;
+    --font-sans-serif: "Poppins", sans-serif;
+    --font-serif: "DM Serif Display", serif;
+  }
+  
+  *,
+  *:before,
+  *:after {
+    box-sizing: inherit;
+  }
+  
+  html {
+    box-sizing: border-box;
+    background-color: var(--red);
+  }
+  
+ h1 {
+    font-family: var(--font-serif);
+    font-size: 6em;
+    line-height: 1em;
+    letter-spacing: 0.05em;
+    color: white;
+    padding: 20px 0 0 30px;
+  }
