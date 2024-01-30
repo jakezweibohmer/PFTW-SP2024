@@ -1,14 +1,14 @@
 function setup () {
-  createCanvas(200, 200);
+  createCanvas(600, 600);
 }
 
-function createTile () {
-  translate(0, 0);
-  fill(134, 222, 8);
+function createTile (originX, originY, primaryColor, secondaryColor, circleOutlineColor, dotColor, secondDotColor) {
+  translate(originX, originY);
+  fill(primaryColor);
   rect(0, 0, 200, 200);
 
   // diagonal strokes
-  stroke(205, 240, 184);
+  stroke(secondaryColor);
   strokeWeight(5);
   line(0, 0, 200, 200);
   line(200, 0, 0, 200);
@@ -21,18 +21,18 @@ function createTile () {
   
   // outlined circles
   noFill();
-  stroke(62, 134, 19);
+  stroke(circleOutlineColor);
   strokeWeight(5);
   circle(100, 100, 100);
   noFill();
-  stroke(62, 134, 19);
+  stroke(circleOutlineColor);
   strokeWeight(3);
   circle(100, 100, 170);
   circle(100, 100, 180);
   
   // big circles
   noStroke();
-  fill(190, 239, 70);
+  fill(dotColor);
   circle(100, 50, 50);
   circle(50, 100, 50);
   circle(150, 100, 50);
@@ -41,7 +41,7 @@ function createTile () {
   
   // small circles
   noStroke();
-  fill(202, 220, 30);
+  fill(secondDotColor);
   circle(100, 50, 25);
   circle(50, 100, 25);
   circle(150, 100, 25);
@@ -51,5 +51,14 @@ function createTile () {
 }
 
 function draw () {
-    createTile();
+  createTile(0, 0, 'lightgreen', 'teal', 'white', 'yellow', 'teal');
+  createTile(0, 200, 'teal', 'white', 'lightgreen', 'lightgreen', 'yellow');
+  createTile(0, 200, 'lightgreen', 'teal', 'white', 'yellow', 'teal');
+  createTile(200, -400, 'teal', 'white', 'lightgreen', 'lightgreen', 'yellow');
+  createTile(0, 200, 'lightgreen', 'teal', 'white', 'yellow', 'teal');
+  createTile(0, 200, 'teal', 'white', 'lightgreen', 'lightgreen', 'yellow');
+  createTile(0, 200, 'teal', 'white', 'lightgreen', 'lightgreen', 'yellow');
+  createTile(200, -600, 'lightgreen', 'teal', 'white', 'yellow', 'teal');
+  createTile(0, 200, 'teal', 'white', 'lightgreen', 'lightgreen', 'yellow');
+  createTile(0, 200, 'lightgreen', 'teal', 'white', 'yellow', 'teal');
 }
