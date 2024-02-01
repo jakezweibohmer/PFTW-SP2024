@@ -90,7 +90,7 @@ function resetQuiz () {
   incorrectCount = 0;
   incorrectResponse = 'Incorrect: 0';
 /*   correctCount = 0;
-  correctResponse = 'Incorrect: 0'; */
+  correctResponse = 'correct: 0'; */
   response = '';
   currentQuestion = next ();
   message = currentQuestion.question;
