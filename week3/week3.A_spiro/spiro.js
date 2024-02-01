@@ -15,11 +15,11 @@ function makeArm(rotateBy) {
   strokeWeight(1);
   ellipse(200, 200 + alt, 200 / alt);
   stroke(0, 255, 0);
-  bezier(alt - 30, alt + 10, 10, 10, 250, 100, 90, 80);
+  bezier(alt + 30, alt + 10, 10, 10, 250, 100, 90, 80);
   noFill();
   stroke(255, 0, 0);
   strokeWeight(1);
-  ellipse(150, 150 + alt, 200 / alt);
+  ellipse(150, 150 + alt, 180 / alt);
 }
 
 function draw () {
