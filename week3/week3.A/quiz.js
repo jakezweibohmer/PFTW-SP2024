@@ -7,9 +7,9 @@ let responseColor = 'green';
 let heading;
 let incorrectResponse = 'Incorrect: 0';
 let incorrectCount = 0;
-let correctResponse = 'Correct: 0';
-let correctCount = 0;
-let resetMessage = 'Answer questions capitalizing the first letter of each word.\n'+ '(Click the RESET button anytime. 5 incorrect answers result in a loss.)';
+/* let correctResponse = 'Correct: 0';
+let correctCount = 0; */
+let resetMessage = 'Answer questions capitalizing the first letter of each word.\n'+ 'Click the RESET button anytime.\n'+ '(5 incorrect answers results in a loss. 5 correct answers, you WIN!)';
 let statements = [
   { question: 'Where was the first Starbucks opened outside of the United States? ', answer: 'Japan' },
 
@@ -34,7 +34,7 @@ let statements = [
 
 // alert function
 function next () {
-  if(statements.length < 1) {
+  if(statements.length < 6) {
     alert('You won!');
     return;
   }
@@ -55,7 +55,7 @@ function checkQuestion () {
 
 // incorrect answer counter
     incorrectCount += 1;
-    incorrectResponse = `Incorrect: ${incorrectCount}`
+    incorrectResponse = `Incorrect: ${incorrectCount} out of 5`
 
     if (incorrectCount > 4) {
       response = 'You Lost!';
@@ -64,15 +64,15 @@ function checkQuestion () {
 
  // correct answer counter
       correctCount += 1;
-      correctResponse = `Correct: ${correctCount}`
+      correctResponse = `Correct: ${correctCount} out of ${statements.length}`
     }
-    if (correctCount > 4) {
+    if (correctCount < 6) {
       response = 'You Won!';
-      responseColor = 'Green'; */
-
+      responseColor = 'Green';
+ */
     }else{
       // this is the wrong answer condition
-      response = 'Oops, that wasn\'t quite right! Try another.';
+      response = 'Sorry, that was incorrect! Try another question.';
       responseColor = 'red';
     }
   }
@@ -89,6 +89,8 @@ let message = currentQuestion.question;
 function resetQuiz () {
   incorrectCount = 0;
   incorrectResponse = 'Incorrect: 0';
+/*   correctCount = 0;
+  correctResponse = 'Incorrect: 0'; */
   response = '';
   currentQuestion = next ();
   message = currentQuestion.question;
@@ -118,10 +120,10 @@ function draw () {
   text(message, 100, 200);
   fill(responseColor);
   text(response, 100, 350);
-  textSize(25);
+  textSize(30);
   fill('red');
   text(incorrectResponse, 100, 400);
-/*   textSize(25);
+/*   textSize(30);
   fill('green');
   text(correctResponse, 300, 400); */
   textSize(16);
