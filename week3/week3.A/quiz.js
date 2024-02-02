@@ -7,8 +7,8 @@ let responseColor = 'green';
 let heading;
 let incorrectResponse = 'Incorrect: 0';
 let incorrectCount = 0;
-/* let correctResponse = 'Correct: 0';
-let correctCount = 0; */
+let correctResponse = 'Correct: 0';
+let correctCount = 0;
 let resetMessage = 'Answer questions capitalizing the first letter of each word.\n'+ 'Click the RESET button anytime.\n'+ '(5 incorrect answers results in a loss. 5 correct answers, you WIN!)';
 let statements = [
   { question: 'Where was the first Starbucks opened outside of the United States? ', answer: 'Japan' },
@@ -42,43 +42,44 @@ function next () {
   return statements[randomIndex];
 }
 // question function
-function checkQuestion () {
+function checkQuestion() {
   if (currentQuestion.answer === questionInput.value()) {
-    // remove correct answer from array
+    // Remove correct answer from array
     statements = statements.filter(statementObj => {
       return currentQuestion.answer !== statementObj.answer;
-});
-    // this is the correct condition
+    });
+
+    // correct answer counter
+    correctCount += 1;
+    correctResponse = `Correct: ${correctCount} out of 5`;
+
+    // response for correct answer
     response = 'Correct! Next question';
     responseColor = 'green';
-  } else{
 
-// incorrect answer counter
+    if (correctCount >= 4) {
+      response = 'You Won!';
+      responseColor = 'green';}
+
+  } else {
+    // Incorrect answer counter
     incorrectCount += 1;
-    incorrectResponse = `Incorrect: ${incorrectCount} out of 5`
+    incorrectResponse = `Incorrect: ${incorrectCount} out of 5`;
 
     if (incorrectCount > 4) {
       response = 'You Lost!';
       responseColor = 'red';
-/*     } else{
-
- // correct answer counter
-      correctCount += 1;
-      correctResponse = `Correct: ${correctCount} out of ${statements.length}`
-    }
-    if (correctCount < 6) {
-      response = 'You Won!';
-      responseColor = 'Green';
- */
-    }else{
-      // this is the wrong answer condition
+    } else {
+      // Incorrect answer condition
       response = 'Sorry, that was incorrect! Try another question.';
       responseColor = 'red';
     }
   }
+  // Get the next question
   currentQuestion = next();
   questionInput.value('');
-  if(currentQuestion) {
+
+  if (currentQuestion) {
     message = currentQuestion.question;
   }
 }
@@ -89,8 +90,8 @@ let message = currentQuestion.question;
 function resetQuiz () {
   incorrectCount = 0;
   incorrectResponse = 'Incorrect: 0';
-/*   correctCount = 0;
-  correctResponse = 'correct: 0'; */
+  correctCount = 0;
+  correctResponse = 'Correct: 0';
   response = '';
   currentQuestion = next ();
   message = currentQuestion.question;
@@ -120,12 +121,12 @@ function draw () {
   text(message, 100, 200);
   fill(responseColor);
   text(response, 100, 350);
-  textSize(30);
+  textSize(26);
   fill('red');
   text(incorrectResponse, 100, 400);
-/*   textSize(30);
+  textSize(26);
   fill('green');
-  text(correctResponse, 300, 400); */
+  text(correctResponse, 380, 400);
   textSize(16);
   fill('white');
   text(resetMessage, 100, 430);
