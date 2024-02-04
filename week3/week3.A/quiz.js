@@ -9,7 +9,7 @@ let incorrectResponse = 'Incorrect: 0';
 let incorrectCount = 0;
 let correctResponse = 'Correct: 0';
 let correctCount = 0;
-let resetMessage = 'Answer questions capitalizing the first letter of each word.\n'+ 'Click the RESET button anytime.\n'+ '(5 incorrect answers results in a loss. 5 correct answers, you WIN!)';
+let resetMessage = 'Answer questions capitalizing the first letter of each word.\n'+ 'Click the RESET button anytime.\n' + '(5 incorrect answers results in a loss. 5 correct answers, you WIN!)\n' + 'Refresh your browser window after a win to play again.';
 let statements = [
   { question: 'Where was the first Starbucks opened outside of the United States? ', answer: 'Japan' },
 
@@ -57,7 +57,7 @@ function checkQuestion() {
     response = 'Correct! Next question';
     responseColor = 'green';
 
-    if (correctCount >= 4) {
+    if (correctCount >= 5) {
       response = 'You Won!';
       responseColor = 'green';}
 
@@ -70,7 +70,7 @@ function checkQuestion() {
       response = 'You Lost!';
       responseColor = 'red';
     } else {
-      // Incorrect answer condition
+      // response for Incorrect answer
       response = 'Sorry, that was incorrect! Try another question.';
       responseColor = 'red';
     }
