@@ -35,7 +35,7 @@ let statements = [
 // alert function
 function next () {
   if(statements.length < 6) {
-    alert('You won!');
+    alert('You won!\n' + '(Refresh your browser window to try again)');
     return;
   }
   const randomIndex = Math.ceil(Math.random() * statements.length - 1);
@@ -100,7 +100,7 @@ function resetQuiz () {
 
 function setup () {
   createCanvas(1000, 600);
-  heading = createElement('h1', ['Trivia Quiz']);
+  heading = createElement('h1', ['Bar Trivia']);
   heading.position(100, 80);
   questionInput = createInput('');
   questionInput.size(360, 35);
@@ -114,6 +114,7 @@ function setup () {
   resetButton.mousePressed(resetQuiz);
   resetButton.position(310, 300);
  }
+
 function draw () {
   background('orange');
   fill('black');
