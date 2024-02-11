@@ -1,7 +1,15 @@
+let myCard;
+const DOWN = "down";
+const UP = "up";
+
 function setup() {
   createCanvas(800, 600);
   background(0);
-  let myCard = new Card();
+  myCard = new Card();
+}
+
+function mousePressed() {
+  console.log(myCard.didHit(mouseX, mouseY));
 }
 
 class Card {
@@ -10,10 +18,38 @@ class Card {
     this.y = 100;
     this.width = 80;
     this.height = 100;
+    this.face = "down";
     this.show();
   }
   show() {
-    fill("rgb(57.7%, 9.9%, 9.9%)");
-    rect(this.x, this.y, this.width, this.height, 10);
+    if (this.face === DOWN) {
+      fill("rgb(57.7%, 9.9%, 9.9%)");
+      rect(this.x, this.y, this.width, this.height, 10);
+    } else {
+      fill("#aaa");
+      rect(this.x, this.y, this.width, this.height, 10);
+    }
+  }
+
+  didHit(mouseX, mouseY) {
+    if (
+      mouseX >= this.x &&
+      mouseX <= this.x + this.width &&
+      mouseY >= this.y &&
+      mouseY <= this.y + this.height
+    ) {
+      this.flip();
+      return true;
+    } else {
+      return false;
+    }
+  }
+  flip() {
+    if (this.face === DOWN) {
+      this.face = UP;
+    } else {
+      this.face = DOWN;
+    }
+    this.show();
   }
 }
