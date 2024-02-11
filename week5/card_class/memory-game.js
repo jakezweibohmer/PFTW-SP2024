@@ -3,7 +3,13 @@ const UP = "up";
 let startingX = 100;
 let startingY = 200;
 let cards = [];
-const gameState = {};
+const gameState = {
+  totalPairs: 10,
+  flippedCards: [],
+  numMatched: 0,
+  attempts: 0,
+  waiting: false,
+};
 
 let cardfaceArray = [];
 let cardback;
@@ -25,7 +31,6 @@ function preload() {
 
 function setup() {
   createCanvas(700, 920);
-  background(0);
   let selectedFaces = [];
   for (let z = 0; z < 10; z++) {
     const randomIdx = floor(random(cardfaceArray.length));
@@ -47,11 +52,64 @@ function setup() {
   }
 }
 
+function draw() {
+  background(0);
+  if (gameState.numMatched === gameState.totalPairs) {
+    fill("yellow");
+    textSize(50);
+    text("YOU WIN!", 350, 150);
+    noLoop();
+  }
+  for (let k = 0; k < cards.length; k++) {
+    if (!cards[k].isMatch) {
+      cards[k].face = DOWN;
+    }
+    cards[k].show();
+  }
+
+  // scoreboard
+  noLoop();
+  gameState.flippedCards.length = 0;
+  gameState.waiting = false;
+  fill(255);
+  textSize(36);
+  text("Attempts: " + gameState.attempts, 100, 100);
+  text("Matches: " + gameState.numMatched, 100, 150);
+}
+
 function mousePressed() {
+  if (gameState.waiting) {
+    return;
+  }
   /*   loop for card flips */
   for (let k = 0; k < cards.length; k++) {
-    if (cards[k].didHit(mouseX, mouseY)) {
+    // first check flipped cards length, and then we can trigger the flip
+    if (gameState.flippedCards.length < 2 && cards[k].didHit(mouseX, mouseY)) {
       console.log("flipped", cards[k]);
+      gameState.flippedCards.push(cards[k]);
+    }
+  }
+  if (gameState.flippedCards.length === 2) {
+    gameState.attempts++;
+    if (
+      gameState.flippedCards[0].cardFaceImg ===
+      gameState.flippedCards[1].cardFaceImg
+    ) {
+      // situation where cards match
+      // mark cards as matched so they don't flip back
+      gameState.flippedCards[0].isMatch = true;
+      gameState.flippedCards[1].isMatch = true;
+      // empty the flipped cards array
+      gameState.flippedCards.length = 0;
+      // increment the score
+      gameState.numMatched++;
+      loop();
+    } else {
+      gameState.waiting = true;
+      const loopTimeout = window.setTimeout(() => {
+        loop();
+        window.clearTimeout(loopTimeout);
+      }, 1000);
     }
   }
 }
@@ -64,20 +122,21 @@ class Card {
     this.height = 110;
     this.face = "down";
     this.cardFaceImg = cardFaceImg;
+    this.isMatch = false;
     this.show();
   }
   show() {
-    if (this.face === DOWN) {
+    if (this.face === UP || this.isMatch) {
+      fill("#aaa");
+      /* rounded the rectangle 100% to create a circle */
+      rect(this.x, this.y, this.width, this.height, 100);
+      image(this.cardFaceImg, this.x, this.y, this.width, this.height);
+    } else {
       fill("rgb(57.7%, 9.9%, 9.9%)");
       /* rounded the rectangle 100% to create a circle */
       rect(this.x, this.y, this.width, this.height, 100);
       /* placing images on backs */
       image(cardback, this.x, this.y, this.width, this.height);
-    } else {
-      fill("#aaa");
-      /* rounded the rectangle 100% to create a circle */
-      rect(this.x, this.y, this.width, this.height, 100);
-      image(this.cardFaceImg, this.x, this.y, this.width, this.height);
     }
   }
 
