@@ -7,16 +7,19 @@ const distance = 2;
 
 function setup() {
   createCanvas(500, 500);
-  background(0);
+  background(254, 0, 108);
   drawBlock(blockX, blockY, 255);
 }
 
 function drawBlock(x, y, color) {
-  fill(color || 255);
+  // lowered opacity for smoother transition
+  fill(color || 254, 195, 0, 20);
+  strokeWeight(0);
   rect(x, y, 50, 50);
 }
 
 function keyTyped() {
+  // both keyTped and keyPressed seemed to work for me
   let keyToNumber = Number(key);
   if (isNaN(keyToNumber)) {
     return;
@@ -34,10 +37,10 @@ window.setTimeout(() => {
       blockY = 0;
       blockX += 50;
     }
-    if (blockY - 50 > height && blockX - 50 > width) {
+    if (blockY - 10 > height && blockX - 10 > width) {
       // cancels timer
       window.clearInterval(drawTimer);
-      alert("Finished");
+      alert("What a masterpiece! Great job!");
     }
   }, speed);
 }, 1500);
