@@ -1,3 +1,4 @@
+// array for for loop
 let bubbles = [];
 
 function setup() {
@@ -9,6 +10,7 @@ function setup() {
 
 function draw() {
   background(254, 0, 96);
+  // changed to for loop
   for (let i = 0; i < bubbles.length; i++) {
     bubbles[i].move();
     bubbles[i].show();
@@ -30,6 +32,7 @@ class Bubble {
     stroke(83, 2, 32);
     strokeWeight(4);
     noFill();
+    // changed bubble to a rectangle from an ellipse
     rect(this.x, this.y, 50, 50);
   }
 }
